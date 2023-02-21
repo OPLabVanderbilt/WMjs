@@ -32,6 +32,7 @@ function make_trials(digits, load, trial_duration) {
         stimulus: make_html(displayed),
         choices: 'NO_KEYS',
         trial_duration: trial_duration,
+        data: { TestTrial: false }
     })
 
     // Loop through remaining digits
@@ -47,17 +48,26 @@ function make_trials(digits, load, trial_duration) {
         trials.push({
             type: jsPsychHtmlKeyboardResponse,
             stimulus: make_html(zerodDisplayed),
+            choices: 'NO_KEYS',
+            trial_duration: 250,
+            data: { TestTrial: false }
+        })
+
+        trials.push({
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: make_html(zerodDisplayed),
             choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-            trial_duration: trial_duration,
+            trial_duration: trial_duration - 250,
             data: {
                 TestTrial: true,
                 ChangeIdx: changeIdx,
                 Digits: displayed.join('-'),
-                CorrRes: String(lastDigit)
+                CorrRes: String(lastDigit),
+                TrialN: NaN
             },
             on_finish: function (data) {
                 data.Corr = jsPsych.pluginAPI.compareKeys(data.response, data.CorrRes)
-                console.log(data.Corr)
+                console.log(data)
             }
         })
 
@@ -137,16 +147,26 @@ timeline.push({
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <p>You will see a box with a digit inside.</p>
-        <p>The digit will change. When it does, type the digit that was there before.</p>
+        <p>The digit will change. When it does, type the digit that was there 
+        before.</p>
         <p>Keep doing this every time a digit changes inside a box.</p>
-        <p>When you make a response or you take too long, another box's digit will change.</p>
+        <p>When you make a response or you take too long, another box's digit 
+        will change.</p>
+        <p><b>Remember 
+        that if you take too long, another digit will change</b>, always respond 
+        about the box that most recently changed.</p>
         <p>Press any buttton to continue.</p>
     `,
     post_trial_gap: 1000
 });
 
 // Add every trial
+let trialCounter = 1
 for (trial of make_trials(load1Digits, 1, 2500)) {
+    if (trial.data.TestTrial === true) {
+        trial.data.TrialN = trialCounter
+        trialCounter += 1
+    }
     timeline.push(trial)
 }
 
@@ -160,6 +180,10 @@ timeline.push({
 });
 
 for (trial of make_trials(load2Digits, 2, 2900)) {
+    if (trial.data.TestTrial === true) {
+        trial.data.TrialN = trialCounter
+        trialCounter += 1
+    }    
     timeline.push(trial)
 }
 
@@ -173,6 +197,10 @@ timeline.push({
 });
 
 for (trial of make_trials(load3Digits, 3, 3100)) {
+    if (trial.data.TestTrial === true) {
+        trial.data.TrialN = trialCounter
+        trialCounter += 1
+    }
     timeline.push(trial)
 }
 
