@@ -118,10 +118,10 @@ timeline.push({
 timeline.push({
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
-        <p>You will presented word-number pairings to remember.</p>
-        <p>After all pairs have been presented, you will be prompted with either
-        a word or a number.</p>
-        <p>Click the button that corresponds to the prompt.</p>
+        <p>You will presented sets of word-number pairings to remember.</p>
+        <p>After all pairs of a set have been presented, you will be prompted 
+        with either a word or a number.</p>
+        <p>Click the button that was paired with the prompt in the set.</p>
         <p>Afterwards, you will be presented with new sets of word-number pairs
         and tested on that set.</p>
         <p>Press any buttton to start.</p>
