@@ -48,16 +48,7 @@ function make_trials(digits, load, trial_duration) {
         trials.push({
             type: jsPsychHtmlKeyboardResponse,
             stimulus: make_html(zerodDisplayed),
-            choices: 'NO_KEYS',
-            trial_duration: 250,
-            data: { TestTrial: false }
-        })
-
-        trials.push({
-            type: jsPsychHtmlKeyboardResponse,
-            stimulus: make_html(zerodDisplayed),
             choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-            trial_duration: trial_duration - 250,
             data: {
                 TestTrial: true,
                 ChangeIdx: changeIdx,
@@ -150,13 +141,49 @@ timeline.push({
         <p>The digit will change. When it does, type the digit that was there 
         before.</p>
         <p>Keep doing this every time a digit changes inside a box.</p>
-        <p>When you make a response or you take too long, another box's digit 
+        <p>When you make a response, a digit 
         will change.</p>
-        <p><b>Remember 
-        that if you take too long, another digit will change</b>, always respond 
-        about the box that most recently changed.</p>
-        <p>Press any buttton to continue.</p>
+        <p>Always respond about the digit that most recently changed.</p>
+        <p>Press any buttton to practice.</p>
     `,
+    post_trial_gap: 1000
+});
+
+timeline.push({
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: make_html([3]),
+    choices: 'NO_KEYS',
+    prompt: "Remember the digit inside the box.",
+    trial_duration: 3500,
+    data: { TestTrial: false }
+})
+
+timeline.push({
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: make_html([5]),
+    choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    prompt: "The digit changed. Type the digit that was there before.",
+    data: { TestTrial: false }
+})
+
+timeline.push({
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: make_html([8]),
+    choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    prompt: "The digit changed again. Type the digit that was there before.",
+    data: { TestTrial: false }
+})
+
+timeline.push({
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+        <p>The box started with a 3.</p>
+        <p>When it changed into a 5, you should've typed 3.</p>
+        <p>Then, when it changed into a 8, you should've typed 5.</p>
+        <p>There can be multiple boxes that you will need to remember but only 
+        will change at a time.</p>
+        <p>Press any buttton to start.</p>
+        `,
     post_trial_gap: 1000
 });
 
@@ -183,7 +210,7 @@ for (trial of make_trials(load2Digits, 2, 2900)) {
     if (trial.data.TestTrial === true) {
         trial.data.TrialN = trialCounter
         trialCounter += 1
-    }    
+    }
     timeline.push(trial)
 }
 
