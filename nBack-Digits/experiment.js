@@ -1,7 +1,7 @@
 let chainLink = '' // Change this to link to another experiment/site at finish
 
 const load1Digits = [6, 3, 4]
-const load2Digits = [3, 0, 8, 2, 7, 4, 0]
+const load2Digits = [3, 0, 8, 2, 7, 4, 0, 1, 9]
 const load3Digits = [6, 5, 8, 1, 4, 1, 6, 2]
 
 var jsPsych = initJsPsych({
