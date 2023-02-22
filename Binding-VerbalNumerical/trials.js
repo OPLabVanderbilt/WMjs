@@ -21,7 +21,7 @@ const trials = [
         "Load": 3,
         "Probe": "lamp",
         "CorrRes": 96,
-        "Pairs": [['salad', 79], ['ruler', 81], ['lamp', 96]]
+        "Pairs": [['salad', 36], ['ruler', 81], ['lamp', 96]]
     },
     {
         "ProbeType": "Number",
@@ -67,13 +67,21 @@ const trials = [
         "ProbeType": "Number",
         "TrialN": 9,
         "Load": 4,
-        "Probe": 89,
-        "CorrRes": "apple",
+        "Probe": 59,
+        "CorrRes": "camera",
         "Pairs": [['camera', 59], ['dawn', 25], ['pepper', 21], ['apple', 84]]
     },
     {
         "ProbeType": "Word",
         "TrialN": 10,
+        "Load": 4,
+        "Probe": "rice",
+        "CorrRes": 40,
+        "Pairs": [['dawn', 43], ['gift', 81], ['rice', 40], ['apple', 16]]
+    },
+    {
+        "ProbeType": "Word",
+        "TrialN": 11,
         "Load": 4,
         "Probe": "actor",
         "CorrRes": 61,
@@ -81,7 +89,7 @@ const trials = [
     },
     {
         "ProbeType": "Number",
-        "TrialN": 11,
+        "TrialN": 12,
         "Load": 5,
         "Probe": 79,
         "CorrRes": "phone",
@@ -89,7 +97,7 @@ const trials = [
     },
     {
         "ProbeType": "Number",
-        "TrialN": 12,
+        "TrialN": 13,
         "Load": 5,
         "Probe": 81,
         "CorrRes": "brain",
@@ -97,18 +105,26 @@ const trials = [
     },
     {
         "ProbeType": "Word",
-        "TrialN": 13,
+        "TrialN": 14,
         "Load": 5,
         "Probe": "phone",
         "CorrRes": 25,
         "Pairs": [['rice', 40], ['drum', 97], ['gift', 84], ['brain', 96], ['phone', 25]]
     },
     {
+        "ProbeType": "Number",
+        "TrialN": 15,
+        "Load": 5,
+        "Probe": 36,
+        "CorrRes": "material",
+        "Pairs": [['train', 16], ['phone', 89], ['material', 36], ['brain', 61], ['lamp', 81]]
+    },
+    {
         "ProbeType": "Word",
-        "TrialN": 14,
+        "TrialN": 16,
         "Load": 6,
         "Probe": "crate",
         "CorrRes": 43,
-        "Pairs": [['material', 43], ['pepper', 79], ['salad', 35], ['crate', 43], ['drum', 40], ['phone', 61]]
+        "Pairs": [['material', 28], ['pepper', 79], ['salad', 35], ['crate', 43], ['drum', 40], ['phone', 61]]
     }
 ]
