@@ -121,10 +121,9 @@ const trials = [
     },
     {
         "ProbeType": "Word",
-        "TrialN": 16,
         "Load": 6,
-        "Probe": "crate",
-        "CorrRes": 43,
-        "Pairs": [['material', 28], ['pepper', 79], ['salad', 35], ['crate', 43], ['drum', 40], ['phone', 61]]
+        "TrialN": 16,
+        "Pairs": [['material', 28], ['pepper', 79], ['salad', 35], ['crate', 43], ['drum', 40], ['phone', 61]],
+        "Foils": [[16, 26], [36, 59], [86, 23], [16, 84], [81, 83], [25, 97]]
     }
 ]

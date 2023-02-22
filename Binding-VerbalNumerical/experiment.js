@@ -8,10 +8,21 @@ var jsPsych = initJsPsych({
     }
 })
 
-jsPsych.randomization.setSeed(2022)
+jsPsych.randomization.setSeed(2023)
 
 function make_trials(trial) {
     let trials = []
+
+    if (!trial.hasOwnProperty('Probe')) {
+        trials.push({
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: `
+                <p>In this set, you will be tested on every pair in the set.</p>
+                <p>Press any keyboad buttton to start.</p>
+            `,
+            post_trial_gap: 1000
+        });
+    }
     // Presentation trials
     for (pair of trial.Pairs) {
         trials.push({
@@ -23,33 +34,61 @@ function make_trials(trial) {
         })
     }
 
-    // Make choices
-    let choices = trial.ProbeType == "Word" ?
-        trial.Pairs.map(pair => pair[1]) : trial.Pairs.map(pair => pair[0])
+    if (trial.hasOwnProperty('Probe')) {
+        // Make choices
+        let choices = trial.ProbeType == "Word" ?
+            trial.Pairs.map(pair => pair[1]) : trial.Pairs.map(pair => pair[0])
 
-    // Shuffle choices
-    choices = jsPsych.randomization.shuffle(choices)
+        // Shuffle choices
+        choices = jsPsych.randomization.shuffle(choices)
 
-    // Response trial
-    trials.push({
-        type: jsPsychHtmlButtonResponse,
-        stimulus: `<p>${trial.Probe}</p>`,
-        choices: choices,
-        post_trial_gap: 1000,
-        data: {
-            TestTrial: true,
-            TrialN: trial.TrialN,
-            ProbeType: trial.ProbeType,
-            Probe: trial.Probe,
-            Pairs: trial.Pairs,
-            Choices: choices,
-            CorrRes: choices.indexOf(trial.CorrRes)
-        },
-        on_finish: function (data) {
-            data.Corr = data.CorrRes == data.response
-            console.log(data)
+        // Response trial
+        trials.push({
+            type: jsPsychHtmlButtonResponse,
+            stimulus: `<p>${trial.Probe}</p>`,
+            choices: choices,
+            post_trial_gap: 1000,
+            data: {
+                TestTrial: true,
+                TrialN: trial.TrialN,
+                ProbeType: trial.ProbeType,
+                Probe: trial.Probe,
+                Pairs: trial.Pairs,
+                Choices: choices,
+                CorrRes: choices.indexOf(trial.CorrRes)
+            },
+            on_finish: function (data) {
+                data.Corr = data.CorrRes == data.response
+                console.log(data)
+            }
+        })
+    } else {
+        allTestTrials = []
+        for (let i = 0; i < trial.Pairs.length; i++) {
+            let allTestChoices = jsPsych.randomization.shuffle(trial.Foils[i].concat(trial.Pairs[i][1]))
+            allTestTrials.push({
+                type: jsPsychHtmlButtonResponse,
+                stimulus: `<p>${trial.Pairs[i][0]}</p>`,
+                choices: allTestChoices,
+                post_trial_gap: 1000,
+                data: {
+                    TestTrial: true,
+                    TrialN: trial.TrialN + i,
+                    ProbeType: trial.ProbeType,
+                    Probe: trial.Pairs[i][0],
+                    Pairs: trial.Pairs,
+                    Choices: allTestChoices,
+                    CorrRes: allTestChoices.indexOf(trial.Pairs[i][1])
+                },
+                on_finish: function (data) {
+                    data.Corr = data.CorrRes == data.response
+                    console.log(data)
+                }
+            })
         }
-    })
+        allTestTrials = jsPsych.randomization.shuffle(allTestTrials)
+        trials = trials.concat(allTestTrials)
+    }
 
     return trials
 }
@@ -135,6 +174,7 @@ for (trial of trials) {
         timeline.push(slide)
     }
 }
+
 
 // Exit fullscreen
 timeline.push({
