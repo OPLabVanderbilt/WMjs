@@ -127,7 +127,8 @@ nBackData <- read_csv(nBackPath) |>
 nBackSummary <- nBackData |>
     group_by(SbjID) |>
     summarise(
-        MeanPerf = mean(Corr)
+        nBackPerf = mean(Corr),
+        nBackNTrial = n()
     )
 nBackMatrix <- long2Matrix(nBackData, "SbjID", "Corr", "TrialN")
 tmp <- nBackMatrix[, seq_len(ncol(nBackMatrix) - 1)]
@@ -149,7 +150,8 @@ bindingData <- read_csv(bindingPath) |>
 bindingSummary <- bindingData |>
     group_by(SbjID) |>
     summarise(
-        MeanPerf = mean(Corr)
+        BindingPerf = sum(Corr) / length(Corr),
+        BindingNTrial = n()
     )
 bindingMatrix <- long2Matrix(bindingData, "SbjID", "Corr", "TrialN")
 tmp <- bindingMatrix[, seq_len(ncol(bindingMatrix) - 1)]
@@ -158,9 +160,8 @@ tmp <- tmp[seq_len(nrow(tmp) - 3), ]
 bindingRel <- splitHalf(tmp, check.keys = FALSE)$lambda2
 
 allSummary <- inner_join(nBackSummary, bindingSummary, by = "SbjID")
-names(allSummary) <- c("SbjID", "nBack", "Binding")
 
-ggpairs(allSummary, columns = 2:3)
+ggpairs(allSummary[c("nBackPerf", "BindingPerf")])
 
 # save data
 write_csv(allSummary, "./output/allSummary.csv")
@@ -171,4 +172,7 @@ write_csv(bindingData, "./output/bindingData.csv")
 write.csv(nBackMatrix, "./output/nBackMatrix.csv")
 write.csv(bindingMatrix, "./output/bindingMatrix.csv")
 
-disattCor(cor(allSummary$nBack, allSummary$Binding), nBackRel, bindingRel)
+disattCor(
+    cor(allSummary$nBackPerf, allSummary$BindingPerf),
+    nBackRel, bindingRel
+)
