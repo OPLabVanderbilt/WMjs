@@ -76,8 +76,8 @@ const trials = [
         "TrialN": 10,
         "Load": 4,
         "Probe": "rice",
-        "CorrRes": 40,
-        "Pairs": [['dawn', 43], ['gift', 81], ['rice', 40], ['apple', 16]]
+        "CorrRes": 41,
+        "Pairs": [['dawn', 43], ['gift', 81], ['rice', 41], ['apple', 16]]
     },
     {
         "ProbeType": "Word",
@@ -109,7 +109,7 @@ const trials = [
         "Load": 5,
         "Probe": "phone",
         "CorrRes": 25,
-        "Pairs": [['rice', 40], ['drum', 97], ['gift', 84], ['brain', 96], ['phone', 25]]
+        "Pairs": [['rice', 32], ['drum', 97], ['gift', 84], ['brain', 96], ['phone', 25]]
     },
     {
         "ProbeType": "Number",
@@ -125,5 +125,12 @@ const trials = [
         "TrialN": 16,
         "Pairs": [['material', 28], ['pepper', 79], ['salad', 35], ['crate', 43], ['drum', 40], ['phone', 61]],
         "Foils": [[16, 26], [36, 59], [86, 23], [16, 84], [81, 83], [25, 97]]
+    },
+    {
+        "ProbeType": "Word",
+        "Load": 6,
+        "TrialN": 22,
+        "Pairs": [['brain', 31], ['lamp', 47], ['train', 51], ['rice', 82], ['gift', 63], ['camera', 21]],
+        "Foils": [[61, 96], [81, 84], [86, 23], [16, 23], [84, 59], [89, 59]]
     }
 ]

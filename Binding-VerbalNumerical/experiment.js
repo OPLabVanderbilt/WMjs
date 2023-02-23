@@ -18,7 +18,7 @@ function make_trials(trial) {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: `
                 <p>In this set, you will be tested on every pair in the set.</p>
-                <p>Press any keyboad buttton to start.</p>
+                <p>Press any keyboard buttton to start.</p>
             `,
             post_trial_gap: 1000
         });
