@@ -64,6 +64,7 @@ function make_trials(trial) {
         })
     } else {
         allTestTrials = []
+        initTrialN = trial.TrialN
         for (let i = 0; i < trial.Pairs.length; i++) {
             let allTestChoices = jsPsych.randomization.shuffle(trial.Foils[i].concat(trial.Pairs[i][1]))
             allTestTrials.push({
@@ -73,7 +74,7 @@ function make_trials(trial) {
                 post_trial_gap: 1000,
                 data: {
                     TestTrial: true,
-                    TrialN: trial.TrialN + i,
+                    TrialN: NaN,
                     ProbeType: trial.ProbeType,
                     Probe: trial.Pairs[i][0],
                     Pairs: trial.Pairs,
@@ -82,11 +83,11 @@ function make_trials(trial) {
                 },
                 on_finish: function (data) {
                     data.Corr = data.CorrRes == data.response
-                    console.log(data)
                 }
             })
         }
         allTestTrials = jsPsych.randomization.shuffle(allTestTrials)
+        allTestTrials = allTestTrials.map((trial, i) => { trial.data.TrialN = initTrialN + i; return trial })
         trials = trials.concat(allTestTrials)
     }
 
