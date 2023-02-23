@@ -3,7 +3,7 @@ library(dplyr)
 library(BayesFactor)
 library(psych)
 library(GGally)
-setwd("/data/WMjs/devAnalysis/")
+setwd("/data/WMjs/devAnalysis/v2")
 
 long2Matrix <- function(data, idCol, corrCol, trialNCol, standardize = FALSE) {
     # Create matrix
@@ -117,7 +117,9 @@ nBackPath <- paste0(
     dataFiles[grep("nback-digits", dataFiles)]
 )
 nBackData <- read_csv(nBackPath) |>
-    filter(TestTrial, Source == "prolific") |>
+    filter(
+        TestTrial, Source == "prolific"
+    ) |>
     select(
         SbjID, Study, Source, OrigTime, StartTime, rt, stimulus,
         response, TrialN, ChangeIdx, Digits, CorrRes, Corr
@@ -132,7 +134,6 @@ tmp <- nBackMatrix[, seq_len(ncol(nBackMatrix) - 1)]
 tmp <- tmp[, !is.na(tmp[c("cor"), ])]
 tmp <- tmp[seq_len(nrow(tmp) - 3), ]
 nBackRel <- splitHalf(tmp, check.keys = FALSE)$lambda2
-
 
 
 bindingPath <- paste0(
@@ -160,3 +161,14 @@ allSummary <- inner_join(nBackSummary, bindingSummary, by = "SbjID")
 names(allSummary) <- c("SbjID", "nBack", "Binding")
 
 ggpairs(allSummary, columns = 2:3)
+
+# save data
+write_csv(allSummary, "./output/allSummary.csv")
+write_csv(nBackSummary, "./output/nBackSummary.csv")
+write_csv(bindingSummary, "./output/bindingSummary.csv")
+write_csv(nBackData, "./output/nBackData.csv")
+write_csv(bindingData, "./output/bindingData.csv")
+write.csv(nBackMatrix, "./output/nBackMatrix.csv")
+write.csv(bindingMatrix, "./output/bindingMatrix.csv")
+
+disattCor(cor(allSummary$nBack, allSummary$Binding), nBackRel, bindingRel)
