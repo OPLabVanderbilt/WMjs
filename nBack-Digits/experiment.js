@@ -2,7 +2,8 @@ let chainLink = '' // Change this to link to another experiment/site at finish
 
 const load1Digits = [6, 3, 4]
 const load2Digits = [3, 0, 8, 2, 7, 4, 0, 1, 9]
-const load3Digits = [6, 5, 8, 1, 4, 1, 6, 2]
+const load3Digits = [6, 5, 8, 1, 4, 1, 6, 2, 3, 5]
+const load4Digits = [9, 8, 9, 1, 7, 6, 1, 2, 0, 3, 7, 4]
 
 var jsPsych = initJsPsych({
     on_finish: function () {
@@ -143,6 +144,7 @@ timeline.push({
         <p>Keep doing this every time a digit changes inside a box.</p>
         <p>When you make a response, a digit 
         will change.</p>
+        <p>Later in the test, you will have to remember digits from multiple boxes</p>
         <p>Always respond about the digit that most recently changed.</p>
         <p>Press any buttton to practice.</p>
     `,
@@ -197,10 +199,14 @@ for (trial of make_trials(load1Digits, 1, 2500)) {
     timeline.push(trial)
 }
 
+
 timeline.push({
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <p>Now remember two digits.</p>
+        <p>With multiple digits, the boxes that haven't recently changed will hide their digit.</p>
+        <p>Remember that you should type the digit that was in the box that was just changed,
+        the correct answer is the digit that was there before it changed.</p>
         <p>Press any buttton to continue.</p>
     `,
     post_trial_gap: 1000
@@ -218,6 +224,9 @@ timeline.push({
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <p>Now remember three digits.</p>
+        <p>With multiple digits, the boxes that haven't recently changed will hide their digit.</p>
+        <p>Remember that you should type the digit that was in the box that was just changed,
+        the correct answer is the digit that was there before it changed.</p>
         <p>Press any buttton to continue.</p>
     `,
     post_trial_gap: 1000
@@ -231,6 +240,25 @@ for (trial of make_trials(load3Digits, 3, 3100)) {
     timeline.push(trial)
 }
 
+timeline.push({
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+        <p>Now remember four digits.</p>
+        <p>With multiple digits, the boxes that haven't recently changed will hide their digit.</p>
+        <p>Remember that you should type the digit that was in the box that was just changed,
+        the correct answer is the digit that was there before it changed.</p>
+        <p>Press any buttton to continue.</p>
+        `,
+    post_trial_gap: 1000
+});
+
+for (trial of make_trials(load4Digits, 4, 3500)) {
+    if (trial.data.TestTrial === true) {
+        trial.data.TrialN = trialCounter
+        trialCounter += 1
+    }
+    timeline.push(trial)
+}
 
 // Exit fullscreen
 timeline.push({
