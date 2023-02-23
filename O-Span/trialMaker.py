@@ -129,8 +129,8 @@ np.random.shuffle(operations)
 
 
 counter = 1
-for trial in range(trialsPerLength):
-    for length in listLengths:
+for length in listLengths:
+    for trial in range(trialsPerLength):
         trials = trials + [
             {
                 "TrialN": counter,

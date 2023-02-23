@@ -205,6 +205,12 @@ timeline.push({
     post_trial_gap: 1000
 });
 
+for (trial of testTrials) {
+    for (slide of make_trials(trial)) {
+        timeline.push(slide)
+    }
+}
+
 
 // Exit fullscreen
 timeline.push({
