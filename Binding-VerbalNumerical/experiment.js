@@ -18,7 +18,7 @@ function make_trials(trial) {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: `
                 <p>In this set, you will be tested on every pair in the set.</p>
-                <p>Press any keyboard buttton to start.</p>
+                <p>Press any keyboard button to start.</p>
             `,
             post_trial_gap: 1000
         });
@@ -164,7 +164,7 @@ timeline.push({
         <p>Click the button that was paired with the prompt in the set.</p>
         <p>Afterwards, you will be presented with new sets of word-number pairs
         and tested on that set.</p>
-        <p>Press any buttton to start.</p>
+        <p>Press any button to start.</p>
     `,
     post_trial_gap: 1000
 });
@@ -188,7 +188,7 @@ timeline.push({
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <p>You have finished this test, good job!</p>
-        <p>Press any buttton to continue.</p>
+        <p>Press any button to continue.</p>
     `,
 });
 

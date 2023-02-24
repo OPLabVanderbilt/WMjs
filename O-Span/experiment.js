@@ -180,7 +180,7 @@ timeline.push({
         <p>Remember the letters in order.</p>
         <p>After all equations and letters have been presented, you will be asked to type the letters in order.</p>
         <p>The exact sequence and order matters, so guess if you don't remember a letter in a position.</p>
-        <p>Press any buttton to begin practice trials.</p>
+        <p>Press any button to begin practice trials.</p>
     `,
     post_trial_gap: 1000
 });
@@ -200,7 +200,7 @@ timeline.push({
     stimulus: `
         <p>You have finished the practice trials.</p>
         <p>The real test will not give you feedback.</p>
-        <p>Press any buttton to start the real test.</p>
+        <p>Press any button to start the real test.</p>
     `,
     post_trial_gap: 1000
 });
@@ -223,7 +223,7 @@ timeline.push({
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <p>You have finished this test, good job!</p>
-        <p>Press any buttton to continue.</p>
+        <p>Press any button to continue.</p>
     `,
 });
 

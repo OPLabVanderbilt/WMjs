@@ -146,7 +146,7 @@ timeline.push({
         will change.</p>
         <p>Later in the test, you will have to remember digits from multiple boxes</p>
         <p>Always respond about the digit that most recently changed.</p>
-        <p>Press any buttton to practice.</p>
+        <p>Press any button to practice.</p>
     `,
     post_trial_gap: 1000
 });
@@ -184,7 +184,7 @@ timeline.push({
         <p>Then, when it changed into a 8, you should've typed 5.</p>
         <p>There can be multiple boxes that you will need to remember but only 
         will change at a time.</p>
-        <p>Press any buttton to start.</p>
+        <p>Press any button to start.</p>
         `,
     post_trial_gap: 1000
 });
@@ -207,7 +207,7 @@ timeline.push({
         <p>With multiple digits, the boxes that haven't recently changed will hide their digit.</p>
         <p>Remember that you should type the digit that was in the box that was just changed,
         the correct answer is the digit that was there before it changed.</p>
-        <p>Press any buttton to continue.</p>
+        <p>Press any button to continue.</p>
     `,
     post_trial_gap: 1000
 });
@@ -227,7 +227,7 @@ timeline.push({
         <p>With multiple digits, the boxes that haven't recently changed will hide their digit.</p>
         <p>Remember that you should type the digit that was in the box that was just changed,
         the correct answer is the digit that was there before it changed.</p>
-        <p>Press any buttton to continue.</p>
+        <p>Press any button to continue.</p>
     `,
     post_trial_gap: 1000
 });
@@ -247,7 +247,7 @@ timeline.push({
         <p>With multiple digits, the boxes that haven't recently changed will hide their digit.</p>
         <p>Remember that you should type the digit that was in the box that was just changed,
         the correct answer is the digit that was there before it changed.</p>
-        <p>Press any buttton to continue.</p>
+        <p>Press any button to continue.</p>
         `,
     post_trial_gap: 1000
 });
@@ -271,7 +271,7 @@ timeline.push({
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <p>You have finished this test, good job!</p>
-        <p>Press any buttton to continue.</p>
+        <p>Press any button to continue.</p>
     `,
 });
 
