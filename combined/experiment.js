@@ -120,11 +120,11 @@ function make_binding_trials(trial) {
                 Probe: trial.Probe,
                 Pairs: trial.Pairs,
                 Choices: choices,
-                CorrRes: choices.indexOf(trial.CorrRes)
+                CorrRes: choices.indexOf(trial.CorrRes),
+                Task: "Binding-VerbalNumerical"
             },
             on_finish: function (data) {
                 data.Corr = data.CorrRes == data.response
-                console.log(data)
             }
         })
     } else {
@@ -144,7 +144,8 @@ function make_binding_trials(trial) {
                     Probe: trial.Pairs[i][0],
                     Pairs: trial.Pairs,
                     Choices: allTestChoices,
-                    CorrRes: allTestChoices.indexOf(trial.Pairs[i][1])
+                    CorrRes: allTestChoices.indexOf(trial.Pairs[i][1]),
+                    Task: "Binding-VerbalNumerical"
                 },
                 on_finish: function (data) {
                     data.Corr = data.CorrRes == data.response
@@ -249,7 +250,8 @@ function make_oSpan_trials(trial) {
             TrialN: trial.TrialN,
             Load: trial.Load,
             Operations: trial.Operations,
-            Letters: trial.Letters.join('')
+            Letters: trial.Letters.join(''),
+            Task: "oSpan"
         },
         on_finish: function (data) {
             let answer = data.response.answer
